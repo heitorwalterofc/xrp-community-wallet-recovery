@@ -1,0 +1,18 @@
+{
+  "name": "xrp-community-wallet-recovery",
+  "version": "0.1.0",
+  "private": false,
+  "type": "module",
+  "description": "Local-only recovery helper for XRP Community Wallet BIP39 phrases.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node recover.mjs"
+  },
+  "dependencies": {
+    "@scure/bip39": "^2.4.0",
+    "ripple-keypairs": "^3.1.0"
+  }
+}
