@@ -84,7 +84,15 @@ Use this option only when you need to import the account into an XRPL wallet tha
 node recover.mjs "YOUR_TARGET_XRP_ADDRESS" --show-family-seed
 ```
 
-Replace `YOUR_TARGET_XRP_ADDRESS` with the public address before running the command. The family seed controls the funds. Never publish it, send it in a chat, or paste it into a website. If the derived address does not match the target address, do not use the family seed.
+Replace `YOUR_TARGET_XRP_ADDRESS` with the public address before running the command.
+
+### Recommended recovery path
+
+For this recovery method, using the derived **XRPL family seed** is the recommended path. The original BIP39 phrase must first be converted using the XRP Community Wallet derivation process; importing the phrase directly into a wallet that uses a different derivation path may produce a different address.
+
+Only proceed when the output says `Matches: YES`. Then import the displayed family seed into a trusted XRPL-compatible wallet, preferably only temporarily, and transfer the funds to a newly created hardware-wallet account. Verify the destination address and send a small test transaction before moving the remaining balance.
+
+The family seed controls the funds. Never publish it, send it in a chat, or paste it into a website. If the derived address does not match the target address, do not use the family seed.
 
 ## Security
 
