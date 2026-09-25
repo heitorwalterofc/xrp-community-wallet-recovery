@@ -1,12 +1,12 @@
 # XRP Community Wallet Recovery Tool
 
-Ferramenta local para verificar frases BIP39 de carteiras XRP Community Wallet e derivar o endereço XRPL correspondente.
+A local-only tool for checking BIP39 phrases from XRP Community Wallet and deriving the corresponding XRPL address.
 
-> **Importante:** este projeto nunca deve receber uma seed em um site ou serviço online. Execute-o localmente, de preferência em um computador confiável e sem extensões de navegador desnecessárias.
+> **Important:** Never enter a recovery phrase into a website or online service. Run this project locally, preferably on a trusted computer without unnecessary browser extensions.
 
-## O que o projeto faz
+## What this project does
 
-A derivação usada pela carteira é:
+The derivation method used by the wallet is:
 
 ```text
 BIP39 mnemonic
@@ -16,68 +16,91 @@ BIP39 mnemonic
 → XRPL address
 ```
 
-O programa não consulta a blockchain e não envia a seed para a internet. Ele apenas deriva o endereço localmente.
+The program does not query the blockchain and never sends the recovery phrase over the network. It only derives the address locally.
 
-## Requisitos
+## Requirements
 
-- Node.js 20 ou superior
+- Node.js 20 or later
 - npm
 
-## Instalação
+## Installation and execution
+
+Follow these steps in a terminal.
+
+### 1. Verify the prerequisites
+
+Check that Node.js and npm are installed:
+
+```bash
+node --version
+npm --version
+```
+
+Node.js 20 or later is required.
+
+### 2. Open the project directory
+
+Change to the directory containing this project:
+
+```bash
+cd /path/to/xrp-recovery-tool
+```
+
+Replace `/path/to/xrp-recovery-tool` with the actual local path.
+
+### 3. Install dependencies
+
+Install the dependencies locally:
 
 ```bash
 npm install
 ```
 
-## Verificar um endereço
+The project uses only the local packages declared in `package.json`.
 
-Passe somente o endereço público como argumento:
+### 4. Run the address check
+
+Pass only the public address as a command-line argument:
 
 ```bash
-node recover.mjs rNZEEDSuGcUYy2y2D2YX7L1Enp4RCY8GJo
+node recover.mjs "YOUR_TARGET_XRP_ADDRESS"
 ```
 
-O programa solicitará a seed sem exibi-la no terminal. O resultado esperado será semelhante a:
+Replace `YOUR_TARGET_XRP_ADDRESS` with the public address you want to verify. The program will request the recovery phrase without displaying it in the terminal. The output will look similar to:
 
 ```text
-Endereço derivado: r...
-Endereço informado: r...
-Coincide: SIM
+Derived address: r...
+Provided address: r...
+Matches: YES
 ```
 
-Não passe a seed como argumento: isso pode deixá-la registrada no histórico do shell ou visível na lista de processos.
+Do not pass the recovery phrase as a command-line argument. It may be saved in the shell history or visible in the process list.
 
-## Mostrar a family seed
+## Show the family seed
 
-Só use esta opção se você precisa importar a conta em uma carteira XRPL que aceite uma family seed:
+Use this option only when you need to import the account into an XRPL wallet that accepts a family seed:
 
 ```bash
-node recover.mjs rNZEEDSuGcUYy2y2D2YX7L1Enp4RCY8GJo --show-family-seed
+node recover.mjs "YOUR_TARGET_XRP_ADDRESS" --show-family-seed
 ```
 
-A family seed controla os fundos. Não a publique, não a envie por chat e não a cole em websites. Se o endereço não coincidir, não use a family seed.
+Replace `YOUR_TARGET_XRP_ADDRESS` with the public address before running the command. The family seed controls the funds. Never publish it, send it in a chat, or paste it into a website. If the derived address does not match the target address, do not use the family seed.
 
-## Segurança
+## Security
 
-- O código não contém telemetria, servidor ou API de recuperação.
-- Nunca peça a seed de outra pessoa.
-- Nunca armazene seeds em issues, pull requests, logs ou arquivos do repositório.
-- Verifique o endereço derivado antes de assinar qualquer transação.
-- Faça primeiro uma transferência pequena para uma carteira nova.
-- Prefira transferir para uma carteira de hardware recém-inicializada.
-- O repositório não assina nem transmite transações automaticamente.
+- This code has no telemetry, backend, or recovery API.
+- Never ask another person for their recovery phrase.
+- Never store recovery phrases in issues, pull requests, logs, or repository files.
+- Verify the derived address before signing any transaction.
+- Send a small test transaction to a new wallet first.
+- Prefer transferring funds to a newly initialized hardware wallet.
+- This repository does not automatically sign or broadcast transactions.
 
-## Publicação no GitHub
 
-Antes de publicar, confira:
+## Disclaimer
 
-```bash
-git status --short
-git grep -n -i "seed\|family seed\|mnemonic" -- ':!README.md' ':!recover.mjs'
-```
+Use this tool at your own risk. Always review the source code and verify the derived address independently before moving funds.
 
-Nunca inclua uma seed real nos arquivos, testes, commits ou exemplos.
-
-## Licença
+## License
 
 MIT
